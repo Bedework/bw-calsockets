@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+
+<web-app version="3.1"
+         xmlns="http://xmlns.jcp.org/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd">
+  <display-name>Bedework user (authenticated) Calendar WebSocket</display-name>
+
+  <!--
+  <listener>
+    <listener-class>org.bedework.util.servlet.SessionListener</listener-class>
+  </listener>
+  -->
+
+  <listener>
+    <listener-class>org.bedework.calsockets.common.ContextListener</listener-class>
+  </listener>
+
+  <session-config>
+    <session-timeout>10</session-timeout>
+  </session-config>
+
+  <!-- JMS DataSources (java:comp/env/jms) -->
+  <resource-ref>
+    <res-ref-name>jms/BedeworkConnectionFactory</res-ref-name>
+    <res-type>javax.jms.ConnectionFactory</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+
+  <resource-ref>
+    <res-ref-name>jboss/BedeworkManagedThreadFactory</res-ref-name>
+    <res-type>javax.enterprise.concurrent.ManagedThreadFactory</res-type>
+    <res-auth>Container</res-auth>
+  </resource-ref>
+
+  <!-- Insert ejb-ref here -->
+</web-app>
