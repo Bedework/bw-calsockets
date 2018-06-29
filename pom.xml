@@ -16,7 +16,7 @@
     <maven.source.plugin.version>2.1.2</maven.source.plugin.version>
     <!-- Bedework Versions -->
     <bw-xml.version>4.0.4</bw-xml.version>
-    <bw-util.version>4.0.17-SNAPSHOT</bw-util.version>
+    <bw-util.version>4.0.18</bw-util.version>
     <!-- Third Party Library Versions -->
     <apache-http.version>4.2.2</apache-http.version>
     <commons-codec.version>1.5</commons-codec.version>
