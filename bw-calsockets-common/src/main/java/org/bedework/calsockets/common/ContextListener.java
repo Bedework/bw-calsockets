@@ -20,7 +20,7 @@ package org.bedework.calsockets.common;
 
 import org.bedework.calsockets.common.conf.CalSocketsConfigMbean;
 import org.bedework.util.jmx.ConfBase;
-import org.bedework.util.misc.Logged;
+import org.bedework.util.logging.Logged;
 
 import javax.management.ObjectName;
 import javax.servlet.ServletContextEvent;
@@ -30,7 +30,7 @@ import javax.servlet.ServletContextListener;
  * @author douglm
  *
  */
-public class ContextListener extends Logged implements ServletContextListener {
+public class ContextListener implements Logged, ServletContextListener {
   static class Configurator extends ConfBase {
     CalSocketsConfigMbean sysInfo;
 

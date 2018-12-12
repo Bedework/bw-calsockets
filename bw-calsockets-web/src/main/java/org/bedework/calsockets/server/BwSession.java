@@ -16,7 +16,7 @@ import org.bedework.calsockets.common.requests.SyncCollectionRequest;
 import org.bedework.calsockets.common.responses.InitResponse;
 import org.bedework.calsockets.common.responses.Response;
 import org.bedework.calsockets.common.responses.SyncCollectionResponse;
-import org.bedework.util.misc.Logged;
+import org.bedework.util.logging.Logged;
 import org.bedework.util.misc.Util;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -39,7 +39,7 @@ import static org.bedework.calsockets.common.responses.Response.Status.ok;
 /**
  * User: mike Date: 2/23/18 Time: 00:54
  */
-public class BwSession extends Logged {
+public class BwSession implements Logged {
   //@Resource(lookup="java:jboss/ee/concurrency/factory/default")
   private final ManagedThreadFactory threadFactory;
 
@@ -78,7 +78,7 @@ public class BwSession extends Logged {
       return sw.toString();
     } catch (final Throwable t) {
       // TODO - create error response string
-      if (debug) {
+      if (debug()) {
         error(t);
       }
       return "{\"status\": error, \"message\":\"" + t.getMessage() + "\"}";
@@ -110,7 +110,7 @@ public class BwSession extends Logged {
     return Response.ok(resp, null);
   }
 
-  public static class SyncTask extends Logged implements Runnable {
+  public static class SyncTask implements Logged, Runnable {
     private final SyncCollectionRequest req;
     private final BwSession session;
     private Thread thread;
@@ -151,7 +151,7 @@ public class BwSession extends Logged {
         return send(resp);
       }
 
-      if (debug) {
+      if (debug()) {
         debug("Received " + hrefs.size() + " hrefs");
       }
 
@@ -232,7 +232,7 @@ public class BwSession extends Logged {
 
       return Response.ok(resp, null);
     } catch (final Throwable t) {
-      if (debug) {
+      if (debug()) {
         error(t);
       }
 
@@ -291,7 +291,7 @@ public class BwSession extends Logged {
 
       return factory;
     } catch (final Throwable t) {
-      if (debug) {
+      if (debug()) {
         error(t);
       }
 

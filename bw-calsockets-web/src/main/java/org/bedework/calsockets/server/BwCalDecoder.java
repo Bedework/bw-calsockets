@@ -5,7 +5,7 @@ package org.bedework.calsockets.server;
 
 import org.bedework.calsockets.common.JsonMapper;
 import org.bedework.calsockets.common.MessageBase;
-import org.bedework.util.misc.Logged;
+import org.bedework.util.logging.Logged;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
 import com.fasterxml.jackson.databind.ObjectMapper;
@@ -20,8 +20,8 @@ import javax.websocket.EndpointConfig;
 /**
  * User: mike Date: 2/23/18 Time: 15:15
  */
-public class BwCalDecoder extends Logged
-        implements Decoder.TextStream<MessageBase> {
+public class BwCalDecoder
+        implements Logged, Decoder.TextStream<MessageBase> {
   private final ObjectMapper om;
 
   public BwCalDecoder() {
@@ -36,7 +36,7 @@ public class BwCalDecoder extends Logged
     try {
       return readObject(reader, MessageBase.class);
     } catch (final Throwable t) {
-      if (debug) {
+      if (debug()) {
         error(t);
       }
       throw new DecodeException((String)null, t.getMessage(), t);

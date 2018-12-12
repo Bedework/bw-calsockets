@@ -11,7 +11,7 @@ import org.bedework.calsockets.common.responses.SyncCollectionResponse;
 import org.bedework.util.dav.DavUtil;
 import org.bedework.util.dav.DavUtil.DavProp;
 import org.bedework.util.http.BasicHttpClient;
-import org.bedework.util.misc.Logged;
+import org.bedework.util.logging.Logged;
 import org.bedework.util.misc.Util;
 import org.bedework.util.xml.XmlUtil;
 import org.bedework.util.xml.tagdefs.AppleServerTags;
@@ -42,7 +42,7 @@ import javax.xml.namespace.QName;
 /**
  * User: mike Date: 3/1/18 Time: 12:15
  */
-public class CalDAVClient extends Logged {
+public class CalDAVClient implements Logged {
   private static final Map<String, String> icalToCalSockTypes = new HashMap<>();
   private static final Map<String, String> calSockToIcalTypes = new HashMap<>();
 

@@ -18,18 +18,14 @@
 */
 package org.bedework.calsockets.server;
 
-import org.bedework.calsockets.common.JsonMapper;
 import org.bedework.calsockets.common.MessageBase;
 import org.bedework.calsockets.common.requests.InitRequest;
 import org.bedework.calsockets.common.requests.SyncCollectionRequest;
 import org.bedework.calsockets.common.responses.InitResponse;
 import org.bedework.calsockets.common.responses.SyncCollectionResponse;
-import org.bedework.util.misc.Logged;
-
-import com.fasterxml.jackson.databind.ObjectMapper;
+import org.bedework.util.logging.Logged;
 
 import java.io.IOException;
-import java.io.StringWriter;
 import java.security.Principal;
 import java.util.HashMap;
 import java.util.Map;
@@ -52,7 +48,7 @@ import static org.bedework.calsockets.common.MessageBase.syncCollectionAction;
 @SuppressWarnings("unused")
 @ServerEndpoint(value = "/wskt",
         decoders = {BwCalDecoder.class})
-public class BwCalSocket extends Logged {
+public class BwCalSocket implements Logged {
   private static final Map<String, BwSession> bwSessions = new HashMap<>();
 
   /* ====================================================================
@@ -66,12 +62,12 @@ public class BwCalSocket extends Logged {
 
     if (pr == null) {
       // Ignore for the moment
-      if (debug) {
+      if (debug()) {
         debug("Open for session " + id +
                       " with null principal");
       }
     } else {
-      if (debug) {
+      if (debug()) {
         debug("Open for session " + id +
                       " with principal " + pr);
       }
@@ -86,7 +82,7 @@ public class BwCalSocket extends Logged {
 
           bwSessions.put(id, bws);
         } catch (final Throwable t) {
-          if (debug) {
+          if (debug()) {
             error(t);
           }
 
@@ -100,7 +96,7 @@ public class BwCalSocket extends Logged {
   public void close(final Session session) {
     final String id = session.getId();
 
-    if (debug) {
+    if (debug()) {
       debug("Close for session " + id);
     }
 
@@ -124,14 +120,14 @@ public class BwCalSocket extends Logged {
                             final Session session) {
     final String id = session.getId();
 
-    if (debug) {
+    if (debug()) {
       debug("received: " + message + " for id " + id);
     }
 
     final BwSession bws = bwSessions.get(id);
 
     if (bws == null) {
-      if (debug) {
+      if (debug()) {
         debug("No active session for " + id);
       }
       return;
