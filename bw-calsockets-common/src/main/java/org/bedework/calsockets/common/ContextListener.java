@@ -20,6 +20,7 @@ package org.bedework.calsockets.common;
 
 import org.bedework.calsockets.common.conf.CalSocketsConfigMbean;
 import org.bedework.util.jmx.ConfBase;
+import org.bedework.util.logging.BwLogger;
 import org.bedework.util.logging.Logged;
 
 import javax.management.ObjectName;
@@ -111,5 +112,20 @@ public class ContextListener implements Logged, ServletContextListener {
 
   public static CalSocketsConfigMbean getSysInfo() {
     return conf.sysInfo;
+  }
+
+  /* ====================================================================
+   *                   Logged methods
+   * ==================================================================== */
+
+  private BwLogger logger = new BwLogger();
+
+  @Override
+  public BwLogger getLogger() {
+    if ((logger.getLoggedClass() == null) && (logger.getLoggedName() == null)) {
+      logger.setLoggedClass(getClass());
+    }
+
+    return logger;
   }
 }

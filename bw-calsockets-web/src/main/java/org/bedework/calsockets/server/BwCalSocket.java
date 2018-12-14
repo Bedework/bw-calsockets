@@ -23,6 +23,7 @@ import org.bedework.calsockets.common.requests.InitRequest;
 import org.bedework.calsockets.common.requests.SyncCollectionRequest;
 import org.bedework.calsockets.common.responses.InitResponse;
 import org.bedework.calsockets.common.responses.SyncCollectionResponse;
+import org.bedework.util.logging.BwLogger;
 import org.bedework.util.logging.Logged;
 
 import java.io.IOException;
@@ -168,5 +169,20 @@ public class BwCalSocket implements Logged {
     final SyncCollectionResponse resp = bws.syncCollection(req);
 
     bws.send(resp);
+  }
+
+  /* ====================================================================
+   *                   Logged methods
+   * ==================================================================== */
+
+  private BwLogger logger = new BwLogger();
+
+  @Override
+  public BwLogger getLogger() {
+    if ((logger.getLoggedClass() == null) && (logger.getLoggedName() == null)) {
+      logger.setLoggedClass(getClass());
+    }
+
+    return logger;
   }
 }

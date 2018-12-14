@@ -5,6 +5,7 @@ package org.bedework.calsockets.server;
 
 import org.bedework.calsockets.common.JsonMapper;
 import org.bedework.calsockets.common.MessageBase;
+import org.bedework.util.logging.BwLogger;
 import org.bedework.util.logging.Logged;
 
 import com.fasterxml.jackson.databind.DeserializationFeature;
@@ -56,5 +57,20 @@ public class BwCalDecoder
   public <T> T readObject(final Reader rdr,
                           final Class<T> resultType) throws Throwable {
     return om.readValue(rdr, resultType);
+  }
+
+  /* ====================================================================
+   *                   Logged methods
+   * ==================================================================== */
+
+  private BwLogger logger = new BwLogger();
+
+  @Override
+  public BwLogger getLogger() {
+    if ((logger.getLoggedClass() == null) && (logger.getLoggedName() == null)) {
+      logger.setLoggedClass(getClass());
+    }
+
+    return logger;
   }
 }
