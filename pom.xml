@@ -14,13 +14,13 @@
     <!-- Bedework Versions -->
 
     <bw-xml.version>4.0.7</bw-xml.version>
-    <bw-util.version>4.0.20</bw-util.version>
+    <bw-util.version>4.0.21-SNAPSHOT</bw-util.version>
     <bw-util-logging.version>4.0.0</bw-util-logging.version>
 
     <!-- Third Party Library Versions -->
     <apache-http.version>4.2.2</apache-http.version>
     <commons-codec.version>1.5</commons-codec.version>
-    <jackson.version>2.9.6</jackson.version>
+    <jackson.version>2.9.8</jackson.version>
     <jasypt.version>1.9.2</jasypt.version>
     <junit.version>4.8.2</junit.version>
     <servlet-api.version>4.0.0</servlet-api.version>
