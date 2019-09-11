@@ -10,7 +10,8 @@ import org.bedework.calsockets.common.responses.Response;
 import org.bedework.calsockets.common.responses.SyncCollectionResponse;
 import org.bedework.util.dav.DavUtil;
 import org.bedework.util.dav.DavUtil.DavProp;
-import org.bedework.util.http.BasicHttpClient;
+import org.bedework.util.http.Headers;
+import org.bedework.util.http.PooledHttpClient;
 import org.bedework.util.logging.BwLogger;
 import org.bedework.util.logging.Logged;
 import org.bedework.util.misc.Util;
@@ -19,14 +20,11 @@ import org.bedework.util.xml.tagdefs.AppleServerTags;
 import org.bedework.util.xml.tagdefs.CaldavTags;
 import org.bedework.util.xml.tagdefs.WebdavTags;
 
-import org.apache.http.Header;
-import org.apache.http.HttpException;
 import org.apache.http.message.BasicHeader;
 import org.w3c.dom.Element;
 import org.w3c.dom.Node;
 
-import java.io.ByteArrayOutputStream;
-import java.io.InputStream;
+import java.net.URI;
 import java.net.URL;
 import java.security.Principal;
 import java.util.ArrayList;
@@ -74,7 +72,7 @@ public class CalDAVClient implements Logged {
 
   //private static final String caldavWellKnown = "/.well-known/caldav";
   private static final String caldavWellKnown = "/ucal/caldav";
-  private BasicHttpClient cl;
+  private PooledHttpClient cl;
 
   public CalDAVClient(final String calDavUrl,
                       final Principal pr) {
@@ -83,10 +81,11 @@ public class CalDAVClient implements Logged {
     processUrl();
   }
 
-  private BasicHttpClient getCl() throws CalSocketsException {
+  private PooledHttpClient getCl() throws CalSocketsException {
     try {
       if (cl == null) {
-        cl = new BasicHttpClient(30000);
+        cl = new PooledHttpClient(new URI(calDavUrl));
+        cl.setHeadersFetcher(this::getAuthHeaders);
       }
 
       return cl;
@@ -141,7 +140,7 @@ public class CalDAVClient implements Logged {
               du.propfind(getCl(), calDavUrl,
                           Collections.singletonList(
                                   WebdavTags.currentUserPrincipal),
-                          DavUtil.depth0);
+                          "0");
 
       if (Util.isEmpty(els) || (els.size() != 1)) {
         // Not single response element
@@ -175,7 +174,7 @@ public class CalDAVClient implements Logged {
                                         CaldavTags.calendarUserAddressSet,
                                         CaldavTags.scheduleInboxURL,
                                         CaldavTags.scheduleOutboxURL),
-                          DavUtil.depth0);
+                          "0");
 
       if (Util.isEmpty(els) || (els.size() != 1)) {
         // Not single response element
@@ -237,7 +236,7 @@ public class CalDAVClient implements Logged {
                                         WebdavTags.displayname,
                                         WebdavTags.addMember,
                                         CaldavTags.supportedCalendarComponentSet),
-                          DavUtil.depth1);
+                          "1");
 
       if (Util.isEmpty(els)) {
         Response.error(resp, "No calendars available");
@@ -318,7 +317,7 @@ public class CalDAVClient implements Logged {
       final List<Element> els =
               du.propfind(getCl(), req.getCollectionRef(),
                           Collections.singleton(WebdavTags.syncToken),
-                          DavUtil.depth0);
+                          "0");
 
       if (Util.isEmpty(els) || (els.size() != 1)) {
         // Not single response element
@@ -388,12 +387,7 @@ public class CalDAVClient implements Logged {
       return null;
     } finally {
       if (cl != null){
-        try {
-          cl.release();
-        } catch (final HttpException e) {
-          warn(e.getLocalizedMessage());
-        }
-        cl.close();
+        cl.release();
       }
     }
   }
@@ -407,23 +401,8 @@ public class CalDAVClient implements Logged {
   public String getString(final Response resp,
                           final String href) {
     try {
-      final InputStream is = getCl().get(prefix(href),
-                                         "application/calendar+json",
-                                         getAuthHeaders());
-      final ByteArrayOutputStream baos = new ByteArrayOutputStream();
-
-      final int bufSize = 2048;
-      final byte[] buf = new byte[bufSize];
-      while (true) {
-        final int len = is.read(buf, 0, bufSize);
-        if (len == -1) {
-          break;
-        }
-
-        baos.write(buf, 0, len);
-      }
-
-      return baos.toString("UTF-8");
+      return getCl().getString(href,
+                               "application/calendar+json");
     } catch (final Throwable t) {
       Response.error(resp, t);
       return null;
@@ -510,14 +489,14 @@ public class CalDAVClient implements Logged {
     return res;
   }
 
-  private List<Header> getAuthHeaders() {
+  private Headers getAuthHeaders() {
     final String token = ContextListener.getSysInfo().getToken();
 
     if (token == null) {
       return null;
     }
 
-    final List<Header> authheaders = new ArrayList<>(1);
+    final Headers authheaders = new Headers();
     authheaders.add(new BasicHeader("X-BEDEWORK-SOCKETTKN", token));
     authheaders.add(new BasicHeader("X-BEDEWORK-SOCKETPR", pr.getName()));
     authheaders.add(new BasicHeader("X-BEDEWORK-EXTENSIONS", "true"));
