@@ -9,9 +9,9 @@
     </content>
     <orderEntry type="inheritedJdk" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: org.bedework:bw-util-dav:4.0.26" level="project" />
+    <orderEntry type="module" module-name="bw-util-dav" />
     <orderEntry type="library" name="Maven: org.bedework:bw-util-logging:4.0.4" level="project" />
-    <orderEntry type="library" name="Maven: org.bedework:bw-util-http:4.0.26" level="project" />
+    <orderEntry type="module" module-name="bw-util-http" />
     <orderEntry type="library" name="Maven: org.bedework:bw-util-config:4.0.26" level="project" />
     <orderEntry type="library" name="Maven: org.bedework:bw-util-jmx:4.0.26" level="project" />
     <orderEntry type="library" name="Maven: org.apache.httpcomponents:httpclient:4.5.3" level="project" />
