@@ -93,7 +93,7 @@
       <dependency>
         <groupId>org.bedework</groupId>
         <artifactId>bw-util-config</artifactId>
-        <version>${bw-util-conf.version.version}</version>
+        <version>${bw-util-conf.version}</version>
       </dependency>
 
       <dependency>
