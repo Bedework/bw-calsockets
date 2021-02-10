@@ -22,7 +22,7 @@
 
     <!-- Third Party Library Versions -->
     <apache-http.version>4.2.2</apache-http.version>
-    <commons-codec.version>1.5</commons-codec.version>
+    <commons-codec.version>1.15</commons-codec.version>
     <jackson.version>2.10.0</jackson.version>
     <jasypt.version>1.9.2</jasypt.version>
     <junit.version>4.8.2</junit.version>
