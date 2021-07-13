@@ -34,7 +34,7 @@ import java.io.Serializable;
  * <p>The validate method may be overridden and will be called by
  * the api to validate fields.</p>
  * 
- * douglm: spherical cow group
+ * douglm: Bedework Commercial Services
  */
 public class MessageBase implements Serializable {
   /** action should be one of the below + this for a response
