@@ -25,8 +25,7 @@
   <parent>
     <groupId>org.bedework</groupId>
     <artifactId>bw-calsockets</artifactId>
-    <version>4.0.0</version>
-    <relativePath>../</relativePath>
+    <version>4.1.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>bw-calsockets-web</artifactId>
@@ -57,6 +56,12 @@
     <dependency>
       <groupId>javax.websocket</groupId>
       <artifactId>javax.websocket-api</artifactId>
+    </dependency>
+
+    <dependency>
+      <groupId>javax.servlet</groupId>
+      <artifactId>javax.servlet-api</artifactId>
+      <scope>provided</scope>
     </dependency>
   </dependencies>
 </project>

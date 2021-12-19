@@ -25,13 +25,12 @@
   <parent>
     <groupId>org.bedework</groupId>
     <artifactId>bw-calsockets</artifactId>
-    <version>4.0.0</version>
-    <relativePath>../</relativePath>
+    <version>4.1.0-SNAPSHOT</version>
   </parent>
 
   <artifactId>bw-calsockets-common</artifactId>
 
-  <name>bw-calsockets-common</name>
+  <name>Bedework: Experimental websockets for calendars: common classes</name>
   <description>Bedework websockets common classes</description>
   <url>http://bedework.org/</url>
 
