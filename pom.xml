@@ -12,6 +12,13 @@
   <packaging>pom</packaging>
   <name>Bedework: Experimental websockets for calendars</name>
 
+  <scm>
+    <connection>scm:git:git://github.com/Bedework/bw-carddav.git</connection>
+    <developerConnection>scm:git:git://github.com/Bedework/bw-carddav.git</developerConnection>
+    <url>https://github.com/Bedework/bw-carddav</url>
+    <tag>bw-calsockets-4.0.0</tag>
+  </scm>
+
   <modules>
     <module>bw-calsockets-common</module>
     <module>bw-calsockets-war</module>
