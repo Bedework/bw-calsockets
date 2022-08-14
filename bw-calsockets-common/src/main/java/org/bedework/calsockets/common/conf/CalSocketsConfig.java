@@ -10,17 +10,15 @@ import org.bedework.util.jmx.ConfBase;
  */
 public class CalSocketsConfig extends ConfBase<CalSocketsConfImpl>
         implements CalSocketsConfigMbean {
-  /* Name of the property holding the location of the config data */
-  private static final String confuriPname = "org.bedework.calsocket.confuri";
+  /* Name of the directory holding the config data */
+  private static final String confDirName = "calsocket";
 
   /**
    */
   public CalSocketsConfig() {
-    super("org.bedework.calsocket:service=BwCalsockets");
-
-    setConfigName("calsocket");
-
-    setConfigPname(confuriPname);
+    super("org.bedework.calsocket:service=BwCalsockets",
+          confDirName,
+          "calsocket");
   }
 
   /* ========================================================================
