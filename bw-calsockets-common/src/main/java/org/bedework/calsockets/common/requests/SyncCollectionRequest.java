@@ -4,7 +4,7 @@
 package org.bedework.calsockets.common.requests;
 
 import org.bedework.calsockets.common.MessageBase;
-import org.bedework.util.misc.ToString;
+import org.bedework.base.ToString;
 
 /** Starts synching a collection with the client. On receipt of the
  * request the server will initialise the sync and return a response with

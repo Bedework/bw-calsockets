@@ -19,7 +19,7 @@
 package org.bedework.calsockets.common.responses;
 
 import org.bedework.calsockets.common.MessageBase;
-import org.bedework.util.misc.ToString;
+import org.bedework.base.ToString;
 
 import static org.bedework.calsockets.common.responses.Response.Status.failed;
 import static org.bedework.calsockets.common.responses.Response.Status.ok;

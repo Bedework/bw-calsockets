@@ -4,7 +4,7 @@
 package org.bedework.calsockets.common.requests;
 
 import org.bedework.calsockets.common.MessageBase;
-import org.bedework.util.misc.ToString;
+import org.bedework.base.ToString;
 
 /**
  * User: mike Date: 2/8/18 Time: 17:40

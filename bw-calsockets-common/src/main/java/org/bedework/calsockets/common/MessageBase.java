@@ -19,7 +19,7 @@
 package org.bedework.calsockets.common;
 
 import org.bedework.calsockets.common.responses.Response;
-import org.bedework.util.misc.ToString;
+import org.bedework.base.ToString;
 
 import java.io.Serializable;
 
