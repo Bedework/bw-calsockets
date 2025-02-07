@@ -30,10 +30,10 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.enterprise.concurrent.ManagedThreadFactory;
+import jakarta.enterprise.concurrent.ManagedThreadFactory;
 import javax.naming.Context;
 import javax.naming.InitialContext;
-import javax.websocket.Session;
+import jakarta.websocket.Session;
 
 import static org.bedework.calsockets.common.responses.Response.Status.ok;
 

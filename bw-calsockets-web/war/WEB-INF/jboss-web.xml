@@ -14,13 +14,13 @@
 
   <resource-ref>
     <res-ref-name>jms/BedeworkConnectionFactory</res-ref-name>
-    <res-type>javax.jms.ConnectionFactory</res-type>
+    <res-type>jakarta.jms.ConnectionFactory</res-type>
     <jndi-name>${app.activemq.jndi-name}</jndi-name>
   </resource-ref>
 
   <resource-ref>
     <res-ref-name>jboss/BedeworkManagedThreadFactory</res-ref-name>
-    <res-type>javax.enterprise.concurrent.ManagedThreadFactory</res-type>
+    <res-type>jakarta.enterprise.concurrent.ManagedThreadFactory</res-type>
     <jndi-name>java:jboss/ee/concurrency/factory/default</jndi-name>
   </resource-ref>
 </jboss-web>

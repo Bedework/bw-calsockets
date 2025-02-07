@@ -24,8 +24,8 @@ import org.bedework.util.logging.BwLogger;
 import org.bedework.util.logging.Logged;
 
 import javax.management.ObjectName;
-import javax.servlet.ServletContextEvent;
-import javax.servlet.ServletContextListener;
+import jakarta.servlet.ServletContextEvent;
+import jakarta.servlet.ServletContextListener;
 
 /**
  * @author douglm
